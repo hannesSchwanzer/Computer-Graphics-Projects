@@ -1,0 +1,158 @@
+#VRML V2.0 utf8
+
+PROTO Skifahrer [
+	exposedField SFColor color 1 1 1
+    field SFString desc "Skifahrer #1"
+] {
+    DEF Skifahrer Transform {
+        translation 3.5 0.25 0
+        rotation 0 -1 0 1.57
+        children [
+
+            #Ski
+            DEF rechterSki Transform {
+                translation 0 -0.05 1
+                children Shape {
+                    geometry Box {
+                    size 0.5 0.1 5
+                    }
+                    appearance Appearance {
+                        material Material {
+                            diffuseColor 0.396 0.183 0.129
+                        }
+                    }
+                }
+            }
+
+            DEF linkerSki Transform {
+                translation 2 0 0
+                children USE rechterSki
+            }
+
+
+            #Beine
+            DEF rechtesBein Transform {
+                translation -0.25 0 0
+                children Shape {
+                    geometry IndexedFaceSet {
+                        coord Coordinate {point	[
+                            0 0 0       #Punkt A
+                            0 0 0.5     #Punkt B
+                            0 1.5 1.37  #Punkt C
+                            0 3 1       #Punkt D
+                            0 3 0       #Punkt E
+                            0 1.5 0.87  #Punkt F
+                            0.5 0 0       #Punkt G
+                            0.5 0 0.5     #Punkt H
+                            0.5 1.5 1.37  #Punkt I
+                            0.5 3 1       #Punkt J
+                            0.5 3 0       #Punkt K
+                            0.5 1.5 0.87  #Punkt L
+                        ]}
+
+                        coordIndex [0 1 2 3 4 5 -1 6 11 10 9 8 7 -1 0 6 7 1 -1 1 7 8 2 -1 2 8 9 3 -1 3 9 10 4 -1 4 10 11 5 -1 5 11 6 0]
+                    }
+                    appearance Appearance {
+                        material Material {
+                            diffuseColor IS color
+                        }
+                    }
+                }
+            }
+
+            DEF linkesBein Transform {
+                translation 2 0 0
+                children USE rechtesBein
+            }
+
+            
+            #Torso
+            DEF Torso Transform {
+                translation -0.25 3 0
+                children Shape {
+                            geometry IndexedFaceSet {
+                                coord Coordinate {
+                                    point	[
+                                        0 0 0       #Punkt A
+                                        2.5 0 0     #Punkt B
+                                        2.5 0 1   #Punkt C
+                                        0 0 1     #Punkt D
+                                        0 4 0       #Punkt E
+                                        2.5 4 0     #Punkt F
+                                        2.5 4 1   #Punkt G
+                                        0 4 1     #Punkt H
+                                ]}
+                                coordIndex [0 1 2 3 -1 4 7 6 5 -1 3 2 6 7 -1 2 1 5 6 -1 1 0 4 5 -1 0 3 7 4]
+                            }
+                            appearance Appearance {
+                                material Material {
+                                    diffuseColor IS color
+                                }
+                            }
+                        }
+            }
+
+
+            #Arme
+            DEF linkerArm Transform {
+                translation -0.75 3.3 -0.75
+                center -1.25 7.5 0 
+                rotation -1 0 0 0.261799
+                children Shape {
+                            geometry IndexedFaceSet {
+                                coord Coordinate {
+                                    point	[
+                                        0 1.41 0
+                                        0 0 1.41
+                                        0 0.35 1.76
+                                        0 1.62 0.5
+                                        0 3.41 0.5
+                                        0 3.41 0
+                                        0.5 1.41 0
+                                        0.5 0 1.41
+                                        0.5 0.35 1.76
+                                        0.5 1.62 0.5
+                                        0.5 3.41 0.5
+                                        0.5 3.41 0
+
+                                ]}
+                                coordIndex [0 1 2 3 4 5 -1 6 11 10 9 8 7 -1 1 7 8 2 -1 2 8 9 3 -1 3 9 10 4 -1 4 10 11 5 -1 0 6 11 5 -1 1 7 6 0]
+                            }
+                            appearance Appearance {
+                                material Material {
+                                    diffuseColor IS color
+                                }
+                            }
+                        }
+            }
+
+            DEF rechterArm Transform {
+                translation 3 0 0
+                children USE linkerArm
+            }
+
+
+            #Kopf
+            DEF Kopf Transform {
+                translation 1 7.75 0.5
+                children [
+                    Shape {
+                        geometry Sphere {
+                            radius 0.75
+                        }
+                        appearance Appearance {
+                            material Material {
+                                diffuseColor 1 0.713 0.756
+                            }
+                        }
+                    }
+                    Viewpoint {
+						fieldOfView	1.0472
+						description IS desc
+						orientation	0 1 0 3.14159265359
+					}
+            
+                    ]
+            }
+        ]
+}

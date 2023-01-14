@@ -1,0 +1,641 @@
+#VRML V2.0 utf8
+
+EXTERNPROTO Skifahrer [
+	exposedField SFColor color
+    field SFString desc
+] "skifahrer.wrl"
+
+
+DEF Berghang Transform {
+    children [
+        Background {
+            frontUrl "textures/berg.jpg"
+        }
+        DEF DefaultLicht NavigationInfo{
+            headlight TRUE
+        }
+        DEF night DirectionalLight {
+            on TRUE 
+            intensity 0.2 
+            ambientIntensity 0.0 
+            color 1.0 1.0 1.0 
+            direction 0 -1 0
+        }
+        DEF Hang Transform {
+            children [
+
+                DEF Auslauf Transform {
+                    translation 0 -0.5 0
+                    children Shape {
+                        geometry Box {
+                            size 100 1 50
+                        }
+                        appearance Appearance {
+                            material Material {
+                                diffuseColor 1 1 1
+                            }
+                        }
+                    }
+                }
+
+                DEF Grundflaeche Transform {
+                    translation 0 0 -25
+                    children Shape {
+                        geometry IndexedFaceSet {
+                                coord Coordinate {
+                                    point	[
+                                        0 0 0       #Punkt A
+                                        50 0 0
+                                        50 0 50
+                                        0 0 50
+                                        50 25 0
+                                        50 25 50
+                                ]}
+                                coordIndex [0 3 2 1 -1 3 2 5 -1 2 1 4 5 -1 1 0 4 -1 0 3 5 4]
+                            }
+                        appearance Appearance {
+                            material Material {
+                                #specularColor 1 1 1
+                                diffuseColor 1 1 1
+                                
+                            }
+                        }
+                    }
+                }
+
+
+            ]
+        }
+
+
+        #Bäume
+        DEF Baum Transform {
+            translation -45 0 -20
+            children [
+                DEF Stamm Transform {
+                    translation 0 1 0
+                    children Shape {
+                        geometry Cylinder {
+                            radius 1
+                            height 2
+                        }
+                        appearance Appearance {
+                            material Material {
+                                #diffuseColor 0.65 0.16 0.16
+                            }
+                            texture ImageTexture {
+                                url "textures/bark.jpg"
+                                repeatS TRUE
+                                repeatT TRUE
+                            }
+                            textureTransform TextureTransform {                          
+                                scale 1 1 
+                                rotation 1.57079632679
+                            }
+                        }
+                    }
+                }
+
+                DEF Baumkrone Transform {
+                    translation 0 5.5 0
+                    children Shape {
+                        geometry Cone {
+                            bottomRadius 3
+                            height 7
+                        }
+                        appearance Appearance {
+                            material Material {
+                                #diffuseColor 0 1 0
+                            }
+                            texture ImageTexture {
+                                url "textures/leaves.jpg"
+                                repeatS TRUE
+                                repeatT TRUE
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+
+        Transform {
+            translation 5 0 0
+            scale 1 1.5 1
+            children USE Baum
+        }
+
+        Transform {
+            translation 27 0 40
+            scale 1 0.7 1
+            children USE Baum
+        }
+
+        Transform {
+            translation 11 0 0
+            scale 1 1.5 1
+            children USE Baum
+        }
+
+        Transform {
+            translation 0 0 40
+            scale 1 0.7 1
+            children USE Baum
+        }
+
+        Transform {
+            translation 5 0 40
+            scale 1 0.7 1
+            children USE Baum
+        }
+
+        Transform {
+            translation 13 0 40
+            scale 1 1.5 1
+            children USE Baum
+        }
+
+        Transform {
+            translation 20 0 40
+            children USE Baum
+        }
+
+        Transform {
+            translation 0 0 30
+            children USE Baum
+        }
+
+        Transform {
+            translation 0 0 15
+            children USE Baum
+        }
+
+
+        #Schlepplift
+        DEF Schlepplift Transform {
+            translation 0 0 -23
+            children [
+                DEF Sauelen Transform {
+                    translation 0 7 0
+                    children [
+                        DEF Sauele Transform {
+                            translation 0 -0.5 0
+                            children [
+                                DEF SauelenBasis Shape {
+                                    geometry Cylinder {
+                                        radius 0.5
+                                        height 14
+                                    }
+                                    appearance Appearance {
+                                        material Material {
+                                            diffuseColor 0.5 0.5 0.5
+                                        }
+                                    }
+                            
+                                }
+                                Transform {
+                                    translation 0 7 2.25
+                                    children [
+                                        Shape {
+                                            geometry Box {
+                                                size 1 0.25 5
+                                            }
+                                            appearance Appearance {
+                                                material Material {
+                                                    diffuseColor 0.5 0.5 0.5
+                                                }
+                                            }
+                                        }
+                                        DEF Scheinwerfer Transform {
+                                            translation 0 -0.25 2.25
+                                            children [
+                                                Shape {
+                                                    geometry Box {
+                                                        size 1 0.25 0.5
+                                                    }
+                                                    appearance Appearance {
+                                                        material Material {
+                                                            diffuseColor 0 1 0
+                                                            emissiveColor 0 1 0
+                                                        }
+                                                    }
+                                                }
+                                                DEF ScheinwerferLicht SpotLight { 
+                                                    on TRUE 
+                                                    intensity 1 
+                                                    ambientIntensity 0 
+                                                    color 0 1 0 
+                                                    location 0 0 0 
+                                                    direction 0 -1 0 
+                                                    attenuation 1 0 0 
+                                                    radius 100
+                                                    cutOffAngle 0.6
+                                                    beamWidth 0.3
+                                                    } 
+                                            ]
+                                        }
+                                    ]
+                                
+                                }
+                            ]
+                        }
+                        Transform {
+                            translation 11 5.5 0
+                            children USE Sauele
+                        }
+                        Transform {
+                            translation 22 11 0
+                            children USE Sauele
+                        }
+                        Transform {
+                            translation 33 16.5 0
+                            children USE Sauele
+                        }
+                        Transform {
+                            translation 44 22 0
+                            children USE Sauele
+                        }
+                    ]
+                }
+
+                DEF Schiene Transform {
+                    rotation 0 0 1 0.4578
+                    center -25 0 0
+                    translation 25 13.5 3.5
+                    children [
+                        Shape {
+                            geometry Box {
+                                size 50 0.25 1
+                            }
+                            appearance Appearance {
+                                material Material {
+                                    diffuseColor 0.5 0.5 0.5
+                                }
+                            }
+                        }
+                        
+
+                    ]
+                    
+                }
+
+                DEF Sitz Transform {
+                    translation 45 30.5 3.5
+                    children [
+                        Transform {
+                            translation 0 -5.9 0
+                            children Shape {
+                                geometry Cylinder {
+                                    radius 1
+                                    height 0.2
+                                }
+                                appearance Appearance {
+                                    material Material {
+                                        diffuseColor 0.5 0.5 0.5
+                                    }
+                                }
+                            }
+                        }
+                        Transform {
+                            children Shape {
+                                geometry Cylinder {
+                                    radius 0.1
+                                    height 12
+                                }
+                                appearance Appearance {
+                                    material Material {
+                                        diffuseColor 0.5 0.5 0.5
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+
+
+        #Kassenhaeuschen
+        DEF Kassenhaeuschen Transform {
+            translation -15 5 -20
+            children [
+                DEF Grundgebauede Transform {
+                    children Shape {
+                        geometry Box {
+                            size 10 10 7
+                        }
+                        appearance Appearance {
+                            material Material {
+                            }
+                            texture ImageTexture {
+                                url "textures/wall.jpg"
+                                repeatS TRUE
+                                repeatT TRUE
+                            }
+                            textureTransform TextureTransform {                          
+                                scale 1 4 
+                            }
+                        }  
+                    }
+                }
+                DEF Dach Transform {
+                    translation -5 5 -3.5
+                    children Shape {
+                        geometry IndexedFaceSet {
+                            coord Coordinate {
+                                point	[
+                                    0 0 0
+                                    0 0 7
+                                    10 0 7
+                                    10 0 0
+                                    0 4 3.5
+                                    10 4 3.5
+                            ]}
+                            coordIndex [0 3 2 1 -1 1 2 5 4 -1 5 3 0 4 -1 2 3 5 -1 0 1 4]
+                        }
+                        appearance Appearance {
+                            material Material {
+                                #diffuseColor 1 0 0
+                            }
+                            texture ImageTexture {
+                                url "textures/roof.png"
+                                repeatS TRUE
+                                repeatT TRUE
+                            }
+                            textureTransform TextureTransform {                          
+                                scale 1 4 
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+
+        #Schlitten
+        DEF Schlitten Transform {
+            rotation 0 0 1 0.463646716
+            translation 45 22.5 -15
+            children [
+                DEF SchlittenY Transform {
+                    rotation 0 1 0 -1.57079632679
+                    children Shape {
+                        geometry IndexedFaceSet {
+                            coord Coordinate {
+                                point	[
+                                    0 0 0
+                                    0 0 1.5
+                                    2.5 0 1.5
+                                    2.5 0 0
+                                    0 1 0
+                                    0 1 1.5
+                                    2.5 1 1.5
+                                    2.5 1 0
+                            ]}
+                            coordIndex [1 0 3 2 -1 1 2 6 5 -1 2 3 7 6 -1 3 0 4 7 -1 0 1 5 4 -1 4 5 6 7]
+                        }
+                        appearance Appearance {
+                            material Material {
+                                diffuseColor 0.396 0.183 0.129
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+
+        #Skifahrer
+        DEF Ski1 Transform {
+            rotation 0 0 1 0.463646716
+            translation 45 22.5 -10
+            scale 0.5 0.5 0.5
+            children [
+                DEF Ski1y Transform {
+                    rotation 0 1 0 0
+                    children [
+                        Skifahrer{
+                            color 1 0 0
+                            desc "Skifahrer #1"
+                        }
+                        DEF Fackel Transform {
+                            translation 0.5 5 -0.5
+                            children [
+                                Shape {
+                                    geometry Cone {
+                                        bottomRadius 0.5
+                                        height 1
+                                    }
+                                    appearance Appearance {
+                                        material Material {
+                                            diffuseColor 1 0.5 0
+                                            transparency 0.5
+                                        }
+                                    }
+                                }
+                                DEF FackelLicht PointLight { 
+                                                            on FALSE 
+                                                            intensity 0.5
+                                                            ambientIntensity 0.2
+                                                            color 1 0 0
+                                                            location 0 3 0 
+                                                            radius 25
+                                                            }
+                            ]
+                        }
+                    ]    
+                }
+                DEF AnimationStart TouchSensor {}
+                
+            ]
+            
+        }
+
+        Transform {
+            rotation 0 0 1 0.463646716
+            scale 0.5 0.5 0.5
+            translation 45 22.5 0
+            children Skifahrer{
+                color 0 1 0
+                desc "Skifahrer #2"
+            }
+        }
+        Transform {
+            rotation 0 0 1 0.463646716
+            scale 0.5 0.5 0.5
+            translation 45 22.5 5
+            children Skifahrer{
+                color 0 0 1
+                desc "Skifahrer #3"
+            }
+        }
+        Transform {
+            rotation 0 0 1 0.463646716
+            scale 0.5 0.5 0.5
+            translation 45 22.5 10
+            children Skifahrer{
+                color 1 1 0
+                desc "Skifahrer #4"
+            }
+        }
+
+        #Viewpoints
+        Viewpoint {
+            fieldOfView 1.0472
+            position 0 80 45
+            orientation -1 0 0 1.0472
+            description "SchraegOben"
+        }
+
+        Viewpoint {
+            fieldOfView 1.0472
+            position 0 80 0
+            orientation -1 0 0 1.5708
+            description "Vogelperspektive"
+        }
+
+        Viewpoint {
+            fieldOfView 1.0472
+            position -80 15 0
+            orientation 0 -1 0 1.5708
+            description "Auslauf"
+        }
+
+        Transform {
+            rotation 0 0 1 0.4
+            children 
+                Viewpoint {
+                    fieldOfView 1.0472
+                    position 90 30 0
+                    orientation 0 1 0 1.5708
+                    description "Berghang"
+                }
+        }
+
+        Viewpoint {
+            fieldOfView 1.0472
+            position 0 20 80
+            orientation 0 0 0 0
+            description "Vorne"
+        }
+
+
+        #Schalter
+        Transform {
+            translation -40 1 0
+            children [
+                DEF LichtSchalter TouchSensor {}
+                Shape {
+                    geometry Sphere {
+                        radius 2
+                    }
+                    appearance Appearance {
+                        material Material {
+                            diffuseColor 1 0 0
+                        }
+                    }
+                }
+            ]
+        }
+        Transform {
+            translation -40 1 5
+            children [
+                DEF DefaultLichtSchalter TouchSensor {}
+                Shape {
+                    geometry Sphere {
+                        radius 2
+                    }
+                    appearance Appearance {
+                        material Material {
+                            diffuseColor 1 0 1
+                        }
+                    }
+                }
+            ]
+        }
+
+    ]
+}
+
+DEF LichtSchalterScript Script { 
+  eventIn SFBool start
+  eventOut SFBool active
+  exposedField SFBool isActive TRUE
+  url "javascript: 
+    function start(value) { 
+      if(value) {
+          active = !isActive;
+      }
+    }     
+  " 
+}
+
+DEF DefaultLichtSchalterScript Script { 
+  eventIn SFBool start
+  eventOut SFBool defaultActive
+  eventOut SFBool NightActive
+  field SFBool night FALSE
+  url "javascript: 
+    function start(value) { 
+      if(value) {
+          if(night) {
+              night = false;
+              defaultActive = true;
+              NightActive = false;
+          } else {
+              night = true;
+              defaultActive = false;
+              NightActive = true;
+          }
+      }
+    } 
+    
+  " 
+}
+
+DEF Uhr TimeSensor {
+  cycleInterval 30.0
+  loop FALSE
+}
+
+DEF AnimationScript Script {
+    eventIn SFFloat currentFraction
+
+    #Skifahrer
+    eventOut SFRotation rotationY
+    eventOut SFRotation rotationZ
+    eventOut SFVec3f translation
+
+    #Lift
+    eventOut SFVec3f translationLift
+
+    #Schlitten
+    eventOut SFVec3f translationSchlitten
+    eventOut SFRotation rotaionYSchlitten
+    eventOut SFRotation rotaionZSchlitten
+    
+    field SFVec3f startPosition 45 22.5 -10
+    url "animation.js"
+
+}
+
+#Licht und Nachtfahren
+ROUTE LichtSchalter.isActive TO LichtSchalterScript.start
+ROUTE LichtSchalterScript.active TO ScheinwerferLicht.on
+ROUTE ScheinwerferLicht.on TO LichtSchalterScript.isActive
+
+ROUTE DefaultLichtSchalter.isActive TO DefaultLichtSchalterScript.start
+ROUTE DefaultLichtSchalterScript.defaultActive TO DefaultLicht.set_headlight
+ROUTE DefaultLichtSchalterScript.NightActive TO FackelLicht.on
+ROUTE DefaultLichtSchalterScript.NightActive TO night.on
+
+
+#Animation
+ROUTE AnimationStart.touchTime TO Uhr.set_startTime
+ROUTE Uhr.fraction_changed TO AnimationScript.currentFraction
+ROUTE AnimationScript.translation TO Ski1.set_translation
+ROUTE AnimationScript.rotationZ TO Ski1.set_rotation
+ROUTE AnimationScript.rotationY TO Ski1y.set_rotation 
+
+ROUTE AnimationScript.rotaionYSchlitten TO SchlittenY.set_rotation
+ROUTE AnimationScript.rotaionZSchlitten TO Schlitten.set_rotation
+ROUTE AnimationScript.translationSchlitten TO Schlitten.set_translation
+
+ROUTE AnimationScript.translationLift TO Sitz.set_translation

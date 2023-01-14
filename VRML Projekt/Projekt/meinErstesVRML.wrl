@@ -1,0 +1,37 @@
+#VRML V2.0 utf8
+
+Transform{
+	rotation	1 0 1 0.4
+	children[	
+		Transform{ 	
+			rotation	0 0 1 1
+			translation	1 5 -10
+			children[
+				Shape{
+					appearance   	Appearance{
+									material Material{
+										diffuseColor 0 1 0
+									}
+							}#Appearance		
+
+					geometry      	Sphere{
+									radius 	2.4
+							} # Sphere
+				}#Shape
+			] # children inner transform node
+		} # inner transform node
+		
+		Shape{
+			appearance      Appearance{
+							material Material{
+								diffuseColor 1 0.5 0
+							}									
+					}#Appearance		
+
+			geometry        Box{
+							size 	1 4 2
+					} # Box
+		}#Shape
+         ] # children outer transform node
+} # outer transform node
+						
